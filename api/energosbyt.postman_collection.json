@@ -1,0 +1,279 @@
+{
+  "info": {
+    "name": "ЭнергоСбыт — лабораторная № 1",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:18090"
+    }
+  ],
+  "item": [
+    {
+      "name": "Проверить доступность",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/ping"
+      },
+      "response": [
+        {
+          "name": "Проверить доступность",
+          "originalRequest": {
+            "method": "GET",
+            "url": "{{baseUrl}}/ping"
+          },
+          "status": "OK",
+          "code": 200,
+          "header": [],
+          "body": ""
+        }
+      ]
+    },
+    {
+      "name": "Получить собственника",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/users/1"
+      },
+      "response": [
+        {
+          "name": "Получить собственника",
+          "originalRequest": {
+            "method": "GET",
+            "url": "{{baseUrl}}/users/1"
+          },
+          "status": "OK",
+          "code": 200,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "{\n  \"id\": 1,\n  \"fio\": \"Автограйдер Тест\",\n  \"phone\": \"+79999999999\",\n  \"phone_prev\": \"+79000000001\"\n}"
+        }
+      ]
+    },
+    {
+      "name": "Изменить собственника",
+      "request": {
+        "method": "PATCH",
+        "url": "{{baseUrl}}/users/1",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"fio\": \"Петрова Анна Сергеевна\",\n  \"phone\": \"+79111111111\"\n}"
+        }
+      },
+      "response": [
+        {
+          "name": "Изменить собственника",
+          "originalRequest": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/users/1",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"fio\": \"Петрова Анна Сергеевна\",\n  \"phone\": \"+79111111111\"\n}"
+            }
+          },
+          "status": "No Content",
+          "code": 204,
+          "header": [],
+          "body": ""
+        }
+      ]
+    },
+    {
+      "name": "Получить объект",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/realty/1"
+      },
+      "response": [
+        {
+          "name": "Получить объект",
+          "originalRequest": {
+            "method": "GET",
+            "url": "{{baseUrl}}/realty/1"
+          },
+          "status": "OK",
+          "code": 200,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "{\n  \"id\": 1,\n  \"address\": \"ул. Энергетиков, д. 1\",\n  \"square\": 36,\n  \"type\": \"flat\",\n  \"number\": \"1\",\n  \"rooms\": 2,\n  \"floor\": 2,\n  \"porch\": 2\n}"
+        }
+      ]
+    },
+    {
+      "name": "Передать показание",
+      "request": {
+        "method": "POST",
+        "url": "{{baseUrl}}/realty/1/readings",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"user_id\": 1,\n  \"gauge_id\": 1,\n  \"tariff_id\": 1,\n  \"reading_date\": \"2026-10-01\",\n  \"day_kw\": 1250,\n  \"night_kw\": 300\n}"
+        }
+      },
+      "response": [
+        {
+          "name": "Передать показание",
+          "originalRequest": {
+            "method": "POST",
+            "url": "{{baseUrl}}/realty/1/readings",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"user_id\": 1,\n  \"gauge_id\": 1,\n  \"tariff_id\": 1,\n  \"reading_date\": \"2026-10-01\",\n  \"day_kw\": 1250,\n  \"night_kw\": 300\n}"
+            }
+          },
+          "status": "Created",
+          "code": 201,
+          "header": [],
+          "body": ""
+        }
+      ]
+    },
+    {
+      "name": "Получить показания",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/realty/1/readings?date_from=2026-10-01&date_to=2026-10-01"
+      },
+      "response": [
+        {
+          "name": "Получить показания",
+          "originalRequest": {
+            "method": "GET",
+            "url": "{{baseUrl}}/realty/1/readings?date_from=2026-10-01&date_to=2026-10-01"
+          },
+          "status": "OK",
+          "code": 200,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "{\n  \"readings\": [\n    {\n      \"reading_date\": \"2026-10-01\",\n      \"user_id\": 1,\n      \"tariff_id\": 1,\n      \"gauge_id\": 1,\n      \"day_kw\": 1250,\n      \"night_kw\": 300\n    }\n  ],\n  \"count\": 1\n}"
+        }
+      ]
+    },
+    {
+      "name": "Получить счета",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/realty/1/invoices?limit=1&offset=0"
+      },
+      "response": [
+        {
+          "name": "Получить счета",
+          "originalRequest": {
+            "method": "GET",
+            "url": "{{baseUrl}}/realty/1/invoices?limit=1&offset=0"
+          },
+          "status": "OK",
+          "code": 200,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "{\n  \"count\": 36,\n  \"invoices\": [\n    {\n      \"tariff_id\": 1,\n      \"gauge_id\": 1,\n      \"day_kw\": 202,\n      \"night_kw\": 93,\n      \"price\": 154070,\n      \"deadline\": \"2026-11-10\",\n      \"created_at\": \"2026-10-31 23:00:00\"\n    }\n  ]\n}"
+        }
+      ]
+    },
+    {
+      "name": "Получить тариф",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/tariffs?date=2026-10-01"
+      },
+      "response": [
+        {
+          "name": "Получить тариф",
+          "originalRequest": {
+            "method": "GET",
+            "url": "{{baseUrl}}/tariffs?date=2026-10-01"
+          },
+          "status": "OK",
+          "code": 200,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "{\n  \"id\": 1,\n  \"name\": \"День–Ночь\",\n  \"price_day_kwph\": 620,\n  \"price_night_kwph\": 310,\n  \"valid_from\": \"2026-07-01 00:00:00\",\n  \"valid_to\": \"2099-01-01 00:00:00\"\n}"
+        }
+      ]
+    },
+    {
+      "name": "Заменить счётчик",
+      "request": {
+        "method": "POST",
+        "url": "{{baseUrl}}/realty/1/gauges",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"gauge_id\": 2\n}"
+        }
+      },
+      "response": [
+        {
+          "name": "Заменить счётчик",
+          "originalRequest": {
+            "method": "POST",
+            "url": "{{baseUrl}}/realty/1/gauges",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"gauge_id\": 2\n}"
+            }
+          },
+          "status": "Created",
+          "code": 201,
+          "header": [],
+          "body": ""
+        }
+      ]
+    }
+  ]
+}
